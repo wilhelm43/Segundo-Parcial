@@ -1,0 +1,77 @@
+package primosescondidos;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
+public class PrimosEscondidos {
+
+    public static boolean isPrimo(int n) { /* Lo utilizamos para saber si es primo */
+
+        int a = 0; /* Igualamos a = 0 */
+
+        for (int i = 1; i < (n + 1); i++) {
+            if (n % i == 0) {
+                a++;
+            }
+        }
+        if (a != 2) { /* Si a es diferente de 2 */
+
+            return false; /* Me regresa falso */
+
+        } else {
+
+            return true;/* True es primo */
+
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader leer = new BufferedReader(new InputStreamReader(System.in)); /* Se utiliza BufferedReader */
+
+        String linea = leer.readLine(); /* Utilizo el objeto que cree con BufferedReader */
+
+        int n = linea.length(); /* n = al tamaño */
+
+        String aux; /* Se crea un sub-string 1 */
+
+        String aux2; /* Se crea un sub-string 2 */
+
+        int P = Integer.parseInt(linea), D = 0, I = 0;
+
+        if (isPrimo(P)) {
+            P = 1; /* Es Primo */
+
+        } else {
+            P = 0; /* No es Primo */
+
+        }
+        /* Imprime linea */
+        for (int i = 1; i <= linea.length() - 1; i++) { /* Incrementa */
+
+            aux = linea.substring(i, n);
+            int numero = Integer.parseInt(aux);
+            if (isPrimo(numero)) {
+                I++; /* Incremento I */
+
+            }
+            /* Imprime aux */
+        }
+
+        for (int i = linea.length() - 1; i >= 1; i--) { /* Decrementa */
+
+            aux2 = linea.substring(0, i); /* Utilizo desde 0 hasta i */
+
+            int numero = Integer.parseInt(aux2);
+            if (isPrimo(numero)) {
+                D++; /* Incremento D */
+
+            }
+            /* Imprime aux2 */
+        }
+
+        System.out.println(P + " " + I + " " + D); /* Se imprimen las salidas */
+
+    }
+}

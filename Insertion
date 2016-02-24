@@ -1,0 +1,47 @@
+package insertion;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Insertion {
+
+    public static void imprimir(int array[]) {
+        for (int k = 0; k < array.length; k++) {
+            System.out.println(array[k] + "  ");
+        }
+
+    }
+
+    public static int tam;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Dame cantidad de numeros");
+        tam = Integer.parseInt(bf.readLine());
+
+        int[] vect = new int[tam];
+
+        for (int i = 0; i < tam; i++) {
+            System.out.println("Dame el valor " + (i + 1));
+            vect[i] = Integer.parseInt(bf.readLine());
+
+        }
+
+        for (int i = 1; i < vect.length; i++) { //Columnas
+            int aux = vect[i];
+            int j = 1;
+            while (j > 0 && vect[j - 1] > aux) {
+                vect[j] = vect[j - 1];
+                j--;
+
+            }
+            vect[j] = aux;
+            imprimir(vect);
+            System.out.println("");
+        }
+
+    }
+
+}

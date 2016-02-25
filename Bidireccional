@@ -1,0 +1,50 @@
+package bidireccional;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+public class Bidireccional {
+    public static int tam;
+    public static void imprimir(int array[]) {
+        for (int k = 0; k < array.length; k++) {
+            System.out.println(array[k] + "  ");
+        }
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Dame cantidad de numeros");
+        tam = Integer.parseInt(bf.readLine());
+        int[] vect = new int[tam];
+        for (int i = 0; i < tam; i++) {
+            System.out.println("Dame el valor " + (i + 1));
+            vect[i] = Integer.parseInt(bf.readLine());
+        }
+        int aux, cont = 0;
+        int aux2, cont2 = 0;
+        for (int i = 0; i < tam - 1; i++) {
+            for (int a = 0; a < tam + 1; a++) {
+                for (int j = 1; j <= i; j++) {
+                    for (int b = 1; b <= a; b++) {
+                        if (vect[j - 1] > vect[j]) {
+                            aux = vect[j - 1];
+                            vect[j - 1] = vect[j];
+                            vect[j] = aux;
+                            cont++;
+                        }
+                        imprimir(vect);
+                        System.out.println("");
+                        if (vect[b + 1] > vect[b]) {
+                            aux2 = vect[b + 1];
+                            vect[b + 1] = vect[b];
+                            vect[b] = aux2;
+                            cont2++;
+                        }
+                        imprimir(vect);
+                        System.out.println("");
+                    }
+                }
+
+            }
+            System.out.println("Total comparaciones efectivas: " + cont);
+        }
+    }
+}

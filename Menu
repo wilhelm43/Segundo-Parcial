@@ -1,0 +1,133 @@
+package menu;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class Switch {
+
+    public static int tam; //Se puede usar en cualquier parte del codigo
+
+    public static void imprimir(int array[]) {
+        for (int k = 0; k < array.length; k++) {
+            System.out.println(array[k] + "  ");
+        }
+
+    }
+    BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    Scanner leer = new Scanner(System.in);
+    private int num = 0, opc = 0;
+
+    public void menu() {
+        System.out.println("1.-Burbuja");
+        System.out.println("2.-Burbuja Bidireccional");
+        System.out.println("3.-En Mantenimiento/Error!");
+        System.out.println("4.-Insertion");
+    }
+
+    public void leerMenu() throws IOException {
+        System.out.println("..........Menu..........");
+        System.out.println("Dame la opcion: ");
+        menu();
+        opc = leer.nextInt();
+        leerNumero();
+        menuOpciones();
+
+    }
+
+    public void leerNumero() {
+        System.out.println("Dame el numero: ");
+        num = leer.nextInt();
+    }
+
+    public void menuOpciones() throws IOException {
+        switch (opc) {
+            case 1:
+                System.out.println("Dame cantidad de numeros");
+                tam = Integer.parseInt(bf.readLine());
+                int[] vect = new int[tam];
+                for (int i = 0; i < tam; i++) {
+                    System.out.println("Dame el valor " + (i + 1));
+                    vect[i] = Integer.parseInt(bf.readLine());
+                }
+                int aux,
+                 cont = 0;
+                for (int i = 0; i < tam - 1; i++) {
+                    for (int j = 1; j <= i; j++) {
+                        if (vect[j - 1] > vect[j]) {
+                            aux = vect[j - 1];
+                            vect[j - 1] = vect[j];
+                            vect[j] = aux;
+                            cont++;
+                        }
+                        imprimir(vect);
+                        System.out.println("");
+
+                    }
+
+                }
+                System.out.println("Total comparaciones efectivas: " + cont);
+                break;
+            case 2:  
+                        System.out.println("Dame cantidad de numeros");
+        tam = Integer.parseInt(bf.readLine());
+        int[] vect2 = new int[tam];
+        for (int i = 0; i < tam; i++) {
+            System.out.println("Dame el valor " + (i + 1));
+            vect2[i] = Integer.parseInt(bf.readLine());
+        }
+        int aux3, cont3 = 0;
+        int aux2, cont2 = 0;
+        for (int i = 0; i < tam - 1; i++) {
+            for (int a = 0; a < tam + 1; a++) {
+                for (int j = 1; j <= i; j++) {
+                    for (int b = 1; b <= a; b++) {
+                        if (vect2[j - 1] > vect2[j]) {
+                            aux3 = vect2[j - 1];
+                            vect2[j - 1] = vect2[j];
+                            vect2[j] = aux3;
+                            cont3++;
+                        }
+                        imprimir(vect2);
+                        System.out.println("");
+                        if (vect2[b + 1] > vect2[b]) {
+                            aux2 = vect2[b + 1];
+                            vect2[b + 1] = vect2[b];
+                            vect2[b] = aux2;
+                            cont2++;
+                        }
+                        imprimir(vect2);
+                        System.out.println("");
+                    }
+                }
+            }    
+                break;
+            case 3:
+                        System.out.println("Error!!!");
+                break;
+                case 4:
+                    System.out.println("Dame cantidad de numeros");
+        tam = Integer.parseInt(bf.readLine());
+        int[] vect = new int[tam];
+        for (int i = 0; i < tam; i++) {
+            System.out.println("Dame el valor " + (i + 1));
+            vect[i] = Integer.parseInt(bf.readLine());
+        }
+        for (int i = 1; i < vect.length; i++) { //Columnas
+            int aux = vect[i];
+            int j = 1;
+            while (j > 0 && vect[j - 1] > aux) {
+                vect[j] = vect[j - 1];
+                j--;
+            }
+            vect[j] = aux;
+            imprimir(vect);
+            System.out.println("");
+        }     
+                break;              
+        }
+    }
+    }
+}
+

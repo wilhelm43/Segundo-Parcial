@@ -1,0 +1,12 @@
+package selec;
+
+public class Selec {
+
+    public static void main(String[] args) {
+        Test ordena = new Test();
+        int[] arreglo = {4, 3, 7, -125, 264, 7854, 215, -1256};
+        ordena.ordenamientoPorSeleccion(arreglo);
+        ordena.imprime(arreglo);
+    }
+
+}

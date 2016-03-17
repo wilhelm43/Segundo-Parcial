@@ -1,0 +1,63 @@
+package shellsort;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Shellsort {
+
+    public static void imprimir(int t, int vect[]) {
+        for (int i = 0; i < t; i++) {
+            System.out.print(vect[i] + "  ");
+        }
+        System.out.println("");
+    }
+
+    public static void shellsort(int tam, int vect[]) {
+        int tamaux = vect.length;
+        for (int i = 0; i < tamaux - tam; i++) {
+            int varaux = vect[i + tam];
+            if (vect[i] > varaux) {
+                vect[i + tam] = vect[i];
+                vect[i] = varaux;
+                for (int j = i; j >= tam; j--) {
+                    varaux = vect[j - tam];
+                    if (vect[j] < varaux) {
+                        vect[j - tam] = vect[j];
+                        vect[j] = varaux;
+                    } else {
+                        break;
+                    }
+                }
+            }
+            imprimir(tamaux, vect);
+
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
+        System.out.println("Dame el tamaño del vector:");
+        int tam = Integer.parseInt(bf.readLine());
+
+        int[] lista = new int[tam];
+        for (int i = 0; i < tam; i++) {
+            lista[i] = (int) (1 + Math.random() * 50);
+        }
+        imprimir(tam, lista);
+        while (tam > 1) {
+            tam = tam / 2;
+            System.out.println("Gap--->" + tam);
+            shellsort(tam, lista);
+        }
+//char var1 = 'a';        
+//if('s'>'r'){
+//System.out.println("Si a es menor que z");
+//}
+//else{
+//System.out.println("La z es mayor que a");
+//}
+/*Ordenar vector, dependiendo del vector que nos den*/
+    }
+}

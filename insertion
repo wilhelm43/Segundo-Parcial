@@ -1,0 +1,43 @@
+package insertion;
+
+import java.util.Random;
+
+public class Insertion {
+    public static void main(String a[]) {
+        int i;
+
+        int[] arr = new int[100];
+        Random randomGenerator = new Random();
+        for (int idx = 0; idx < 100; ++idx) {
+            arr[idx] = randomGenerator.nextInt(100);
+        }
+
+        System.out.println("\n\n Straight Isertion sort\n\n");
+        System.out.println(" Result Sort\n\n");
+        System.out.println("Values Before the sort:\n");
+
+        for (i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + "  ");
+        System.out.println();
+
+        insertion_srt(arr, arr.length);
+        System.out.print("Values after the sort:\n");
+
+        for (i = 0; i < arr.length; i++)
+            System.out.print(arr[i] + "  ");
+        System.out.println();
+        System.out.println("PAUSE");
+    }
+
+    public static void insertion_srt(int arr[], int n) {
+        for (int i = 1; i < n; i++) {
+            int j = i;
+            int B = arr[i];
+            while ((j > 0) && (arr[j - 1] > B)) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = B;
+        }
+    }
+}

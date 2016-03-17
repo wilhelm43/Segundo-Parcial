@@ -1,0 +1,931 @@
+package lol;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import static java.util.Arrays.sort;
+import java.util.Scanner;
+import java.util.Random;
+import java.lang.*;
+import java.io.*;
+
+public class Lol {
+
+    static char[] abc = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+
+    public static int izquierda, derecha, ultimo;
+    //variables para ordenamiento 
+    public static int arreglo[] = {10, 23, 6, 4, 23, 2, 12, 3, 72, 34};
+    //predefino arreglo
+
+    static Random ran = new Random();
+
+    public static void imprimir11(char array[]) {
+
+        for (int i = 0; i < array.length; i++) {
+
+            System.out.print(array[i] + " ");
+
+        }
+    }
+
+    public static void imprimir5(int t, int vect[]) {
+
+        for (int i = 0; i < t; i++) {
+
+            System.out.print(vect[i] + "  ");
+
+        }
+
+        System.out.println("");
+
+    }
+
+    public static void imprimir4(int t, int vect[]) {
+
+        for (int i = 0; i < t; i++) {
+
+            System.out.print(vect[i] + "  ");
+
+        }
+
+        System.out.println("");
+
+    }
+
+    public static void imprimir1(int array[]) {
+
+        for (int k = 0; k < array.length; k++) {
+
+            System.out.print(array[k] + "  ");
+
+        }
+
+    }
+
+    public static int tam;
+
+    public static int a, b, c;
+
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+
+        Scanner leer = new Scanner(System.in);
+
+        System.out.println("1.-Numeros     2.-Letras");
+
+        a = leer.nextInt();
+
+        if (a == 1) {
+            System.out.println("1.-Burbuja");
+            System.out.println("2.-Burbuja Bidireccional");
+            System.out.println("3.-Insertion");
+            System.out.println("4.-Shellsort");
+            System.out.println("5.-Selecion");
+            System.out.println("6.-Heapsort");
+            System.out.println("7.-Quicksort");
+            System.out.println("8.-RadixSort");
+            b = leer.nextInt();
+
+        } else {
+            System.out.println("1.-Burbuja");
+            System.out.println("2.-Burbuja Bidireccional");
+            System.out.println("3.-Insertion");
+            System.out.println("4.-Shellsort");
+            System.out.println("5.-Selecion");
+            System.out.println("6.-Heapsort");
+            System.out.println("7.-Quicksort");
+            c = leer.nextInt();
+
+        }
+
+        if (b == 1) {
+
+            int tam = ran.nextInt(100);
+
+            int vect[] = new int[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = ran.nextInt(100);
+
+            }
+
+            int aux, cont = 0;
+
+            for (int i = tam - 1; i >= 0; i--) {
+
+                for (int j = 1; j <= i; j++) {
+
+                    if (vect[j - 1] > vect[j]) {
+
+                        aux = vect[j - 1];
+
+                        vect[j - 1] = vect[j];
+
+                        vect[j] = aux;
+
+                        cont++;
+                    }
+
+                    imprimir1(vect);
+
+                    System.out.println("");
+
+                }
+
+            }
+            System.out.println("Total comparaciones efectivas: " + cont);
+
+        }
+
+        if (b == 2) {
+
+            izquierda = 1;
+
+            derecha = arreglo.length;
+
+            ultimo = arreglo.length - 1;
+
+            do {
+
+                for (int i = arreglo.length - 1; i > 0; i--) {
+
+                    //Burbuja hacia la izquierda 
+                    //Los valores menores van a la izquierda 
+                    if (arreglo[i - 1] > arreglo[i]) {
+
+                        int aux = arreglo[i];
+
+                        //variable auxiliar para poder hacer intercambio de arreglo[i] = arreglo[i - 1];
+                        //posicion arreglo[i - 1] = aux;
+                        ultimo = i;
+
+                    }
+
+                }
+                izquierda = ultimo + 1;
+
+                for (int j = 1; j < arreglo.length; j++) {
+
+                    if (arreglo[j - 1] > arreglo[j]) {
+
+                        int aux = arreglo[j];
+
+                        arreglo[j] = arreglo[j - 1];
+
+                        arreglo[j - 1] = aux;
+
+                        ultimo = j;
+
+                    }
+
+                }
+
+                derecha = ultimo - 1;
+
+            } while (derecha >= izquierda);
+
+            for (int i = 0; i < arreglo.length; i++) {
+
+                System.out.print(arreglo[i] + "   ");
+
+            }
+
+        }
+
+        if (b == 3) {
+
+            int i;
+
+            int[] arr = new int[100];
+
+            Random randomGenerator = new Random();
+
+            for (int idx = 0; idx < 100; ++idx) {
+
+                arr[idx] = randomGenerator.nextInt(100);
+
+            }
+
+            System.out.println("\n\n Straight Isertion sort\n\n");
+
+            System.out.println(" Result Sort\n\n");
+
+            System.out.println("Values Before the sort:\n");
+
+            for (i = 0; i < arr.length; i++) {
+
+                System.out.print(arr[i] + "  ");
+            }
+
+            System.out.println();
+
+            insertion_srt(arr, arr.length);
+
+            System.out.print("Values after the sort:\n");
+
+            for (i = 0; i < arr.length; i++) {
+
+                System.out.print(arr[i] + "  ");
+
+            }
+
+            System.out.println();
+
+            System.out.println("PAUSE");
+
+        }
+
+        if (b == 4) {
+
+            System.out.println("Dame el tamaño del vector:");
+
+            int tam = Integer.parseInt(bf.readLine());
+
+            int[] lista = new int[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                lista[i] = (int) (1 + Math.random() * 50);
+
+            }
+
+            imprimir4(tam, lista);
+
+            while (tam > 1) {
+
+                tam = tam / 2;
+
+                System.out.println("Gap--->" + tam);
+
+                shellsort(tam, lista);
+
+            }
+
+        }
+
+        if (b == 5) {
+
+            System.out.println("Dame el tamaño del vector:");
+
+            int tam = Integer.parseInt(bf.readLine());
+
+            int[] lista = new int[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                lista[i] = (int) (1 + Math.random() * 50);
+
+            }
+
+            imprimir5(tam, lista);
+
+            while (tam > 1) {
+
+                tam = tam / 2;
+
+                System.out.println("Gap--->" + tam);
+
+                shellsort(tam, lista);
+
+            }
+
+        }
+
+        if (b == 6) {
+
+            Integer[] arr = new Integer[]{3, 2, 1, 5, 4};
+
+            System.out.println(java.util.Arrays.toString(arr));
+
+            sort(arr);
+
+            System.out.println(java.util.Arrays.toString(arr));
+
+        }
+
+        if (b == 7) {
+
+            int Array[] = {6, 5, 1, 3, 8, 4, 7, 9, 2};
+
+            System.out.println("Original");
+
+            leer(Array);
+
+            System.out.println("");
+
+            int izq = 0;
+
+            int der = Array.length - 1;
+
+            quicksort(Array, izq, der);
+
+            System.out.println("Final");
+
+            leer(Array);
+        }
+        if (b == 8) {
+            int i;
+
+            int[] arr = new int[15];
+
+            System.out.print("original: ");
+
+            for (i = 0; i < arr.length; i++) {
+
+                arr[i] = (int) (Math.random() * 1024);
+
+                System.out.print(arr[i] + " ");
+
+            }
+
+            radixSort(arr);
+
+            System.out.print("\nsorted: ");
+
+            for (i = 0; i < arr.length; i++) {
+
+                System.out.print(arr[i] + " ");
+
+            }
+
+            System.out.println("\nDone ;-)");
+
+        }
+
+        if (c == 1) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            char aux;
+
+            for (int i = tam - 1; i >= 0; i--) {
+
+                for (int j = 1; j <= i; j++) {
+
+                    if (vect[j - 1] > vect[j]) {
+
+                        aux = vect[j - 1];
+
+                        vect[j - 1] = vect[j];
+
+                        vect[j] = aux;
+
+                    }
+
+                    imprimir11(vect);
+
+                    System.out.println("");
+
+                }
+
+            }
+
+        }
+
+        if (c == 2) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            int izquierda = 1;
+
+            int derecha = vect.length;
+
+            char aux;
+
+            int ultimo = vect.length - 1;
+
+            do {
+
+                for (int i = vect.length - 1; i > 0; i--) {
+
+                    if (vect[i - 1] > vect[i]) {
+
+                        aux = vect[i];
+
+                        vect[i] = vect[i - 1];
+
+                        vect[i - 1] = aux;
+
+                        ultimo = i;
+
+                    }
+
+                }
+
+                izquierda = ultimo + 1;
+
+                for (int j = 1; j < vect.length; j++) {
+
+                    if (vect[j - 1] > vect[j]) {
+
+                        aux = vect[j];
+
+                        vect[j] = vect[j - 1];
+
+                        vect[j - 1] = aux;
+
+                        ultimo = j;
+
+                    }
+
+                }
+
+                derecha = ultimo - 1;
+
+                imprimir11(vect);
+
+                System.out.println("");
+
+            } while (derecha >= izquierda);
+
+        }
+
+        if (c == 3) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            for (int i = 1; i < vect.length; i++) {
+
+                char aux = vect[i];
+
+                int j = i;
+
+                while (j > 0 && vect[j - 1] > aux) {
+
+                    vect[j] = vect[j - 1];
+
+                    j--;
+
+                }
+
+                vect[j] = aux;
+
+                imprimir11(vect);
+
+                System.out.println("");
+
+            }
+
+        }
+
+        if (c == 4) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            char aux;
+
+            for (int i = tam - 1; i >= 0; i--) {
+
+                for (int j = 1; j <= i; j++) {
+
+                    if (vect[j - 1] > vect[j]) {
+
+                        aux = vect[j - 1];
+
+                        vect[j - 1] = vect[j];
+
+                        vect[j] = aux;
+
+                    }
+
+                    imprimir11(vect);
+
+                    System.out.println("");
+
+                }
+
+            }
+
+        }
+
+        if (c == 5) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            char aux;
+
+            for (int i = tam - 1; i >= 0; i--) {
+
+                for (int j = 1; j <= i; j++) {
+
+                    if (vect[j - 1] > vect[j]) {
+
+                        aux = vect[j - 1];
+
+                        vect[j - 1] = vect[j];
+
+                        vect[j] = aux;
+
+                    }
+
+                    imprimir11(vect);
+
+                    System.out.println("");
+
+                }
+
+            }
+
+        }
+
+        if (c == 6) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            for (int i = 1; i < vect.length; i++) {
+
+                char aux = vect[i];
+
+                int j = i;
+
+                while (j > 0 && vect[j - 1] > aux) {
+
+                    vect[j] = vect[j - 1];
+
+                    j--;
+
+                }
+
+                vect[j] = aux;
+
+                imprimir11(vect);
+
+                System.out.println("");
+
+            }
+
+        }
+
+        if (c == 7) {
+
+            int tam = ran.nextInt(50);
+
+            char vect[] = new char[tam];
+
+            for (int i = 0; i < tam; i++) {
+
+                vect[i] = abc[(int) (Math.random() * 26)];
+
+            }
+
+            for (int i = 1; i < vect.length; i++) {
+
+                char aux = vect[i];
+
+                int j = i;
+
+                while (j > 0 && vect[j - 1] > aux) {
+
+                    vect[j] = vect[j - 1];
+
+                    j--;
+
+                }
+                vect[j] = aux;
+
+                imprimir11(vect);
+
+                System.out.println("");
+
+            }
+
+        }
+
+    }
+
+    public static void quicksort(int A[], int izq, int der) {
+
+        int pivote = A[izq];
+
+        int i = izq;
+
+        int j = der;
+
+        int aux;
+
+        while (i < j) {            // mientras no se crucen las búsquedas
+
+            while (A[i] <= pivote && i < j) {
+
+                i++; // busca elemento mayor que pivote
+
+            }
+
+            leer(A);
+
+            System.out.println("");
+
+            while (A[j] > pivote) {
+
+                j--;         // busca elemento menor que pivote
+
+            }
+
+            leer(A);
+
+            System.out.println("");
+
+            if (i < j) {                      // si no se han cruzado              
+
+                aux = A[i];                  // los intercambia
+
+                A[i] = A[j];
+
+                A[j] = aux;
+
+                leer(A);
+
+                System.out.println("");
+
+            }
+
+        }
+
+        A[izq] = A[j]; // se coloca el pivote en su lugar de forma que tendremos
+
+        A[j] = pivote; // los menores a su izquierda y los mayores a su derecha
+
+        if (izq < j - 1) {
+
+            quicksort(A, izq, j - 1); // ordenamos subarray izquierdo
+
+            leer(A);
+
+            System.out.println("");
+
+        }
+
+        if (j + 1 < der) {
+
+            quicksort(A, j + 1, der); // ordenamos subarray derecho
+
+            leer(A);
+
+            System.out.println("");
+
+        }
+
+    }
+
+    public static void radixSort(int[] arr) {
+
+        if (arr.length == 0) {
+
+            return;
+
+        }
+
+        int[][] np = new int[arr.length][2];
+
+        int[] q = new int[0x100];
+
+        int i, j, k, l, f = 0;
+
+        for (k = 0; k < 4; k++) {
+
+            for (i = 0; i < (np.length - 1); i++) {
+
+                np[i][1] = i + 1;
+
+            }
+
+            np[i][1] = -1;
+
+            for (i = 0; i < q.length; i++) {
+
+                q[i] = -1;
+
+            }
+
+            for (f = i = 0; i < arr.length; i++) {
+
+                j = ((0xFF << (k << 3)) & arr[i]) >> (k << 3);
+
+                if (q[j] == -1) {
+
+                    l = q[j] = f;
+
+                } else {
+
+                    l = q[j];
+
+                    while (np[l][1] != -1) {
+
+                        l = np[l][1];
+
+                    }
+
+                    np[l][1] = f;
+
+                    l = np[l][1];
+                }
+
+                f = np[f][1];
+
+                np[l][0] = arr[i];
+
+                np[l][1] = -1;
+
+            }
+
+            for (l = q[i = j = 0]; i < 0x100; i++) {
+
+                for (l = q[i]; l != -1; l = np[l][1]) {
+
+                    arr[j++] = np[l][0];
+
+                }
+
+            }
+
+        }
+
+    }
+
+    public static void leer(int[] Array) {
+
+        for (int i = 0; i < Array.length; i++) {
+
+            System.out.print(Array[i] + " ");
+
+        }
+
+    }
+
+    private static int total;
+
+    private static void swap(Comparable[] arr, int a, int b) {
+
+        Comparable tmp = arr[a];
+
+        arr[a] = arr[b];
+
+        arr[b] = tmp;
+
+    }
+
+    private static void heapify(Comparable[] arr, int i) {
+
+        int lft = i * 2;
+
+        int rgt = lft + 1;
+
+        int grt = i;
+
+        if (lft <= total && arr[lft].compareTo(arr[grt]) > 0) {
+
+            grt = lft;
+
+        }
+
+        if (rgt <= total && arr[rgt].compareTo(arr[grt]) > 0) {
+
+            grt = rgt;
+
+        }
+
+        if (grt != i) {
+
+            swap(arr, i, grt);
+
+            heapify(arr, grt);
+
+        }
+
+    }
+
+    public static void sort(Comparable[] arr) {
+
+        total = arr.length - 1;
+
+        for (int i = total / 2; i >= 0; i--) {
+
+            heapify(arr, i);
+
+        }
+
+        for (int i = total; i > 0; i--) {
+
+            swap(arr, 0, i);
+
+            total--;
+
+            heapify(arr, 0);
+
+        }
+
+    }
+
+    private static void shellsort(int tam, int vect[]) {
+
+        int tamaux = vect.length;
+
+        for (int i = 0; i < tamaux - tam; i++) {
+
+            int varaux = vect[i + tam];
+
+            if (vect[i] > varaux) {
+
+                vect[i + tam] = vect[i];
+
+                vect[i] = varaux;
+
+                for (int j = i; j >= tam; j--) {
+
+                    varaux = vect[j - tam];
+
+                    if (vect[j] < varaux) {
+
+                        vect[j - tam] = vect[j];
+
+                        vect[j] = varaux;
+
+                    } else {
+
+                        break;
+
+                    }
+
+                }
+
+            }
+            imprimir4(tamaux, vect);
+
+        }
+
+    }
+
+    private static void insertion_srt(int arr[], int n) {
+
+        for (int i = 1; i < n; i++) {
+
+            int j = i;
+
+            int B = arr[i];
+
+            while ((j > 0) && (arr[j - 1] > B)) {
+
+                arr[j] = arr[j - 1];
+
+                j--;
+
+            }
+
+            arr[j] = B;
+        }
+
+    }
+
+}
